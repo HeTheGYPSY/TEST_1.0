@@ -49,6 +49,3 @@ def run():
         num = int(input("Select a valid module (1-5): "))
     else:
         first()
-
-
-run()
