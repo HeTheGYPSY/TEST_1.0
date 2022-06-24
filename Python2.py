@@ -42,21 +42,3 @@ def argument_parser():
     parser = argparse.ArgumentParser(description="TCP port scanner")
     parser.add_argument("-o", "--host", nargs="?", help="Host IP Address")
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
-
-
-num = int(input("Enter the module to run: "))
-
-
-def second():
-    if num == 1:
-        connection_scan()
-    elif num == 2:
-        port_scan()
-    elif num == 3:
-        argument_parser()
-
-
-while num not in [1, 2, 3]:
-    num = int(input("Enter the module to run: "))
-else:
-    second()
