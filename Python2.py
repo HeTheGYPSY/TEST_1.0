@@ -25,7 +25,7 @@ def port_scan():
     try:
         target_ip = socket.gethostbyname(target)
     except OSError:
-        print("[^] Cannot rexolve {}".format(target))
+        print("[^] Cannot resolve {}".format(target))
         return
     
     try:
@@ -44,4 +44,4 @@ def argument_parser():
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
 
 
-connection_scan()
+port_scan()
