@@ -12,7 +12,7 @@ def connection_scan():
         s.send(b'Banner query\r\n')
         results = s.recv(100)
         print("[+] {}/tcp open".format(target_port))
-        print("[+] {}".format(str((results))))
+        print("[+] {}".format(str(results)))
     except OSError:
         print("[-] {}/tcp closed".format(target_port))
     finally:
@@ -35,7 +35,7 @@ def port_scan():
         print("[*] Scan results for {}".format(target_ip))
 
     t = threading.Thread(target=connection_scan, args=(target, int(port_num)))
-    t.start
+    t.start()
 
 
 def argument_parser():
