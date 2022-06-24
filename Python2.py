@@ -1,1 +1,3 @@
-help("modules")
+import pyautogui
+pyautogui.screenshot()
+
