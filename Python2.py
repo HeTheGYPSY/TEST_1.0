@@ -43,3 +43,5 @@ def argument_parser():
     parser.add_argument("-o", "--host", nargs="?", help="Host IP Address")
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
 
+
+connection_scan()
