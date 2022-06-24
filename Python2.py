@@ -44,4 +44,16 @@ def argument_parser():
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
 
 
-port_scan()
+def second():
+    num = int(input("Enter the module to run: "))
+    if num == 1:
+        connection_scan()
+    elif num == 2:
+        port_scan()
+    elif num == 3:
+        argument_parser()
+    else:
+        while num not in [1, 2, 3]:
+            num = int(input("Enter the module to run: "))
+        else:
+            second()
