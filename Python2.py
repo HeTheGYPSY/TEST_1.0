@@ -3,7 +3,9 @@ import argparse
 import threading
 
 
-def connection_scan(target_ip, target_port):
+def connection_scan():
+    target_ip = input("Please provide the IP Address: ")
+    target_port = input("Please provide the port: ")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((target_ip, target_port))
@@ -17,7 +19,9 @@ def connection_scan(target_ip, target_port):
         s.close()
     
 
-def port_scan(target, port_num):
+def port_scan():
+    target = input("Enter the target: ")
+    port_num = input("Please provide the port number: ")
     try:
         target_ip = socket.gethostbyname(target)
     except OSError:
@@ -38,3 +42,4 @@ def argument_parser():
     parser = argparse.ArgumentParser(description="TCP port scanner")
     parser.add_argument("-o", "--host", nargs="?", help="Host IP Address")
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
+
