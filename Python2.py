@@ -57,3 +57,5 @@ def second():
             num = int(input("Enter the module to run: "))
         else:
             second()
+
+second()
