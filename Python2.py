@@ -27,7 +27,7 @@ def port_scan():
     except OSError:
         print("[^] Cannot resolve {}".format(target))
         return
-    
+
     try:
         target_name = socket.gethostbyaddr(target_ip)
         print("[*] Scan results for {}".format(target_name[0]))
