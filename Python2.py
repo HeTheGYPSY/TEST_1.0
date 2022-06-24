@@ -17,7 +17,7 @@ def connection_scan():
         print("[-] {}/tcp closed".format(target_port))
     finally:
         s.close()
-    
+
 
 def port_scan():
     target = input("Enter the target: ")
