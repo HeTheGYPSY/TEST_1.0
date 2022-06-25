@@ -5,4 +5,11 @@ try:
 except Exception as err_msg:
     print(err_msg)
 finally:
-    print("Execution complete!")
+    print("----------First Execution complete!----------")
+    try:
+        address = input("Enter the IP Address: ")
+        print(socket.gethostbyaddr(address))
+    except Exception as err:
+        print(err)
+    finally:
+        print("----------Second Execution complete!----------")
