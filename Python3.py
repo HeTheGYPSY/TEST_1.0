@@ -1,7 +1,6 @@
 import google.auth
 from google.oauth2 import id_token
 from google.oauth2 import service_account
-import google.auth
 import google.auth.transport.requests
 from google.auth.transport.requests import AuthorizedSession
 target_audience = 'https://your-cloud-run-app.a.run.app'
@@ -14,4 +13,4 @@ print(resp.text)
 request = google.auth.transport.requests.Request()
 token = creds.token
 print(token)
-print(id_token.verify_token(token,request))
+print(id_token.verify_token(token, request))
