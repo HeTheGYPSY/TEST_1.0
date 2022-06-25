@@ -24,6 +24,15 @@ def auth1():
 
 import numpy as np
 import matplotlib.pyplot as plt
-t = np.arange(0., 5., 0.2)
-plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
+import matplotlib.ticker as ticker
+np.random.seed(19680801)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(100*np.random.rand(20))
+formatter = ticker.FormatStrFormatter('$%1.2f')
+ax.yaxis.set_major_formatter(formatter)
+for tick in ax.yaxis.get_major_ticks():
+    tick.label1On = False
+    tick.label2On = True
+    tick.label2.set_color('green')
 plt.show()
