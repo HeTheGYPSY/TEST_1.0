@@ -44,4 +44,8 @@ def argument_parser():
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
 
 
-connection_scan()
+num = int(input("Enter the functin to run: "))
+if num == 1:
+    connection_scan()
+elif num == 2:
+    port_scan()
