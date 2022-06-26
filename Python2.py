@@ -49,3 +49,5 @@ if num == 1:
     connection_scan()
 elif num == 2:
     port_scan()
+else:
+    print("Inappropriate choice!")
