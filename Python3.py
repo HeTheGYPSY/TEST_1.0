@@ -21,3 +21,5 @@ def auth1():
     finally:
         print("**Execution Complete!**")
 
+
+auth1()
