@@ -45,10 +45,18 @@ def argument_parser():
     parser.add_argument("-p", "--ports", nargs="?", help="Comma-separated port list")
 
 
-num = int(input("Enter the function to run: "))
-if num == 1:
-    connection_scan()
-elif num == 2:
-    port_scan()
-else:
-    print("Inappropriate choice!")
+def run():
+    selections = [1, 2, 3, 4, 5]
+    num = int(input("Select the module to run: "))
+
+    def first():
+        if num == 1:
+            connection_scan()
+        elif num == 2:
+            port_scan()
+        else:
+            print("--Module does not exist!--")
+    while num not in selections:
+        num = int(input("Select a valid module (1-5): "))
+    else:
+        first()
