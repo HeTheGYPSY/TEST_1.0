@@ -21,21 +21,22 @@ def connection_scan():
 
 def port_scan():
     target = input("Enter the target: ")
-    port_num = input("Please provide the port number: ")
-    try:
-        target_ip = socket.gethostbyname(target)
-    except OSError:
-        print("[^] Cannot resolve {}".format(target))
-        return
+    port_num = [20, 21, 22, 23, 25, 53, 80, 110, 119, 123, 143, 161, 194, 443, 8080, 8181, 318]
+    for x in port_num:
+        try:
+            target_ip = socket.gethostbyname(target)
+        except OSError:
+            print("[^] Cannot resolve {}".format(target))
+            return
 
-    try:
-        target_name = socket.gethostbyaddr(target_ip)
-        print("[*] Scan results for {}".format(target_name[0]))
-    except OSError:
-        print("[*] Scan results for {}".format(target_ip))
+        try:
+            target_name = socket.gethostbyaddr(target_ip)
+            print("[*] Scan results for {}".format(target_name[0]))
+        except OSError:
+            print("[*] Scan results for {}".format(target_ip))
 
-    t = threading.Thread(target=connection_scan, args=(target, int(port_num)))
-    t.start()
+        t = threading.Thread(target=connection_scan, args=(target, int(x)))
+        t.start()
 
 
 def argument_parser():
