@@ -7,7 +7,7 @@ def auth1():
         from google.auth.transport.requests import AuthorizedSession
         target_audience = 'https://your-cloud-run-app.a.run.app'
         url = 'https://your-cloud-run-app.a.run.app'
-        creds = service_account.IDTokenCredentials.from_service_account_file('/path/to/svc.json', target_audience=target_audience)
+        creds = service_account.IDTokenCredentials.from_service_account_file('C:\Program Files\Google\Chrome\Application\\103.0.5060.114\default_apps\external_extensions.json', target_audience=target_audience)
         authed_session = AuthorizedSession(creds)
         resp = authed_session.get(url)
         print(resp.status_code)
