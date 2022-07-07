@@ -5,18 +5,19 @@ import threading
 
 def connection_scan():
     target_ip = input("Please provide the IP Address: ")
-    target_port = int(input("Please provide the port: "))
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect((target_ip, target_port))
-        s.send(b'Banner query\r\n')
-        results = s.recv(100)
-        print("[+] {}/tcp open".format(target_port))
-        print("[+] {}".format(str(results)))
-    except OSError:
-        print("[-] {}/tcp closed".format(target_port))
-    finally:
-        s.close()
+    target_port = [20, 21, 22, 23, 25, 53, 80, 110, 119, 123, 143, 161, 194, 443, 8080, 8181, 318]
+    for port in target_port:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((target_ip, port))
+            s.send(b'Banner query\r\n')
+            results = s.recv(100)
+            print("[+] {}/tcp open".format(port))
+            print("[+] {}".format(str(results)))
+        except OSError:
+            print("[-] {}/tcp closed".format(port))
+        finally:
+            s.close()
 
 
 def port_scan():
