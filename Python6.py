@@ -157,3 +157,33 @@ def net_info():
     net_io = psutil.net_io_counters()  # get IO statistics since boot
     print(f"Total Bytes Sent: {get_size(net_io.bytes_sent)}")
     print(f"Total Bytes Received: {get_size(net_io.bytes_recv)}")
+
+
+def run_mod():
+    option = int(input("Provide the module to run: "))
+    available = [num for num in range(1, 8)]
+
+    def second():
+        if option == 1:
+            pass_crack()
+        elif option == 2:
+            GPU_info()
+        elif option == 3:
+            sys_info()
+        elif option == 4:
+            CPU_info()
+        elif option == 5:
+            mem_info()
+        elif option == 6:
+            disk_info()
+        elif option == 7:
+            net_info()
+        else:
+            print("Option Unavailable")
+    while option not in available:
+        option = int(input("Provide the module to run(1-7): "))
+    else:
+        second()
+
+
+run_mod()
