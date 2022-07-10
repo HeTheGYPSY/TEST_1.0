@@ -6,16 +6,13 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 
 
-try:
-	port = int(input("Which mail port would you like to use (578/465)? "))
-	smtp = smtplib.SMTP('smtp.gmail.com', port)
-	smtp.ehlo()
-	smtp.starttls()
-	Email = input("Which email would you like to use? ")
-	Password = str(input("Enter the password: "))
-	smtp.login(Email, Password)
-except Exception as err_msg:
-	print(err_msg)
+port = int(input("Which mail port would you like to use (578/465)? "))
+smtp = smtplib.SMTP('smtp.gmail.com', port)
+smtp.ehlo()
+smtp.starttls()
+Email = input("Which email would you like to use? ")
+Password = str(input("Enter the password: "))
+smtp.login(Email, Password)
 
 
 def message(subject="Python Notification", text="", img=None, attachment=None):
