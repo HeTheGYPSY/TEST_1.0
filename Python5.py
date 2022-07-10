@@ -24,6 +24,7 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 			recp = input("Enter a mail recipient: ")
 			to.append(recp)
 			count += 1
+	print("The address list is: {}".format(to))
 	msg = MIMEMultipart()
 	msg['Subject'] = subject
 	msg.attach(MIMEText(text))
