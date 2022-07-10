@@ -2,12 +2,12 @@ import socket
 import colorama
 
 colorama.init()
-LHOST = socket.gethostbyname(socket.gethostname())
-LPORT = 2222
+L_HOST = socket.gethostbyname(socket.gethostname())
+L_PORT = 2222
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((LHOST, LPORT))
+sock.bind((L_HOST, L_PORT))
 sock.listen(1)
-print("Listening on port", LPORT)
+print("Listening on port", L_PORT)
 client, addr = sock.accept()
 while True:
     input_header = client.recv(1024)
