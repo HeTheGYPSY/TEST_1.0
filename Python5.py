@@ -25,8 +25,7 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 
 		for one_img in img:
 			img_data = open(one_img, 'rb').read()
-			msg.attach(MIMEImage(img_data,
-								name=os.path.basename(one_img)))
+			msg.attach(MIMEImage(img_data, name=os.path.basename(one_img)))
 
 	if attachment is not None:
 		if type(attachment) is not list:
@@ -45,8 +44,8 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 
 
 msg = message("Good!", "Hi there!",
-			r"C:\Users\Dell\Downloads\Garbage\Cartoon.jpg",
-			r"C:\Users\Dell\Desktop\slack.py")
+			r"C:\\Users\Dell\Downloads\\Garbage\\Cartoon.jpg",
+			r"C:\\Users\Dell\Desktop\slack.py")
 to = []
 count = 0
 while count < 10:
@@ -56,6 +55,5 @@ while count < 10:
 	else:
 		to.append(recp)
 		count += 1
-smtp.sendmail(from_addr="hello@gmail.com",
-			to_addrs=to, msg=msg.as_string())
+smtp.sendmail(from_addr=Email, to_addrs=to, msg=msg.as_string())
 smtp.quit()
