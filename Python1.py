@@ -1,54 +1,20 @@
-def locate():
-    try:
-        import geocoder
-        from geopy.geocoders import Nominatim
-        address = input("Enter the IP Address: ")
-        geolocator = Nominatim(user_agent="geoapiExercises")
-        ip = geocoder.ip(address)
-        x = ip.latlng
-        location = geolocator.reverse(f'{x[0]}, {x[1]}')
-        print(f"{location}\n{x}")
-    except Exception as err_msg:
-        print(err_msg)
-    finally:
-        if not Exception:
-            print("*|--Execution Completed!--|*")
-        else:
-            print("*|--Execution Failed--|*")
+import hashlib 
+print("**************PASSWORD CRACKER ******************") 
+pass_found = 0 # To check if the password  found or not
+input_hash = input("Enter the hashed password:")
+pass_doc = input("\nEnter passwords filename including path(root / home/): ")
+pass_file = open(pass_doc, 'r')                
+  
+for word in pass_file:  # comparing the input_hash with the hashes of the words in password file
+    enc_word = word.encode('utf-8')   
+    hash_word = hashlib.md5(enc_word.strip())    
+    digest = hash_word.hexdigest()  # digesting that hash into a hexa decimal value
+    if digest == input_hash:  
+        print("Password found.\nThe password is:", word)  # comparing hashes
+        pass_found = 1
+        break
 
-
-def web():
-    try:
-        from urllib.request import urlopen
-        url = str(input("Enter the URL: "))
-        page = urlopen(url)
-        html_bytes = page.read()
-        html_page = html_bytes.decode("UTF-8")
-        print(html_page)
-    except Exception as err_msg:
-        print(err_msg)
-    finally:
-        if not Exception:
-            print("*|--Execution Completed--|*")
-        else:
-            print("*|--Execution Failed--|*")
-
-
-def run():
-    selections = [1, 2, 3, 4, 5]
-    num = int(input("Select the module to run: "))
-
-    def first():
-        if num == 1:
-            locate()
-        elif num == 2:
-            web()
-        else:
-            print("--Module does not exist!--")
-    while num not in selections:
-        num = int(input("Select a valid module (1-5): "))
-    else:
-        first()
-
-
-run()
+if not pass_found:
+    print("Password is not found in the", pass_doc, "file")    
+    print('\n') 
+print("*****************  Thank you  **********************")
