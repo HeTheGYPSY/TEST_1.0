@@ -23,7 +23,7 @@ while True:
                 if read_data == b"DONE":
                     break
 
-    if command is b"":
+    if command == b"":
         print("Please enter a command")
     else:
         client.send(command)
