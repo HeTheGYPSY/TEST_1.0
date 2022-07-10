@@ -16,6 +16,14 @@ smtp.login(Email, Password)
 
 
 def message(subject="Python Notification", text="", img=None, attachment=None):
+	to = []
+	count = 0
+	while count < 10:
+		recp = input("Enter a mail recipient: ")
+		if recp is not None:
+			recp = input("Enter a mail recipient: ")
+			to.append(recp)
+			count += 1
 	msg = MIMEMultipart()
 	msg['Subject'] = subject
 	msg.attach(MIMEText(text))
@@ -40,20 +48,5 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 			file['Content-Disposition'] = f'attachment;\
 			filename="{os.path.basename(one_attachment)}"'
 			msg.attach(file)
-	return msg
-
-
-msg = message("Good!", "Hi there!",
-			r"C:\\Users\Dell\Downloads\\Garbage\\Cartoon.jpg",
-			r"C:\\Users\Dell\Desktop\slack.py")
-to = []
-count = 0
-while count < 10:
-	recp = input("Enter a mail recipient: ")
-	if recp != None:
-		recp = input("Enter a mail recipient: ")
-	else:
-		to.append(recp)
-		count += 1
-smtp.sendmail(from_addr=Email, to_addrs=to, msg=msg.as_string())
-smtp.quit()
+	smtp.sendmail(from_addr=Email, to_addrs=to, msg=msg.as_string())
+	smtp.quit()
