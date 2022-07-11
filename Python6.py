@@ -1,7 +1,9 @@
 import time
 import socket
+import subprocess
 from datetime import datetime as dt
-hosts_path = "C:\\Windows\\System32\\drivers\\etc\\hosts"  # change hosts path according to your OS
+hosts_path = str(input("Provide the file path: "))  # change hosts path according to your OS
+subprocess.call(['chmod', '-R', '+w', hosts_path])
 redirect = socket.gethostbyname(socket.gethostname())
 website_list = ["www.facebook.com", "mobile.facebook.com", "dub119.mail.live.com", "www.dub119.mail.live.com"]
 
