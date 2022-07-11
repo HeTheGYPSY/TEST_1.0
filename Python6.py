@@ -1,7 +1,7 @@
 import time
 import socket
 from datetime import datetime as dt
-hosts_path = "/etc/hosts"  # change hosts path according to your OS
+hosts_path = "C:\\Windows\\System32\\drivers\\etc\\hosts"  # change hosts path according to your OS
 redirect = socket.gethostbyname(socket.gethostname())
 website_list = ["www.facebook.com", "mobile.facebook.com", "dub119.mail.live.com", "www.dub119.mail.live.com"]
 
