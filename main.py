@@ -28,7 +28,7 @@ class Location_tracker:
         self.track_button.bind("<Button-1>", self.track_location)
         # 255757294146
 
-    def track_location(self, event):
+    def track_location(self):
         phone_number = self.phone_number.get()
         country = "Country is Unknown"
         if phone_number:
