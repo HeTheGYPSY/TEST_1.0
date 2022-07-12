@@ -7,11 +7,11 @@ import smtplib
 
 
 port = int(input("Which mail port would you like to use (578/465)? "))
+Email = input("Which email would you like to use? ")
+Password = str(input("Enter the password: "))
 smtp = smtplib.SMTP('smtp.gmail.com', port)
 smtp.ehlo()
 smtp.starttls()
-Email = input("Which email would you like to use? ")
-Password = str(input("Enter the password: "))
 smtp.login(Email, Password)
 
 
@@ -51,3 +51,6 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 			msg.attach(file)
 	smtp.sendmail(from_addr=Email, to_addrs=to, msg=msg.as_string())
 	smtp.quit()
+
+
+message()
