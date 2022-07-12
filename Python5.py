@@ -53,4 +53,4 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 	smtp.quit()
 
 
-message()
+message(subject="THIS IS IT!", text="Hear me now")
