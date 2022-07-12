@@ -3,7 +3,7 @@ import colorama
 
 colorama.init()
 L_HOST = socket.gethostbyname(socket.gethostname())
-L_PORT = 2222
+L_PORT = int(input("Which port are you attacking from? "))
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((L_HOST, L_PORT))
 sock.listen(1)
