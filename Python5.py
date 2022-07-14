@@ -15,10 +15,12 @@ smtp.ehlo()
 smtp.login(Email, Password)
 
 
-def message(subject="Python Notification", text="", img=None, attachment=None):
+def message(subject="Python Notification", img=None, attachment=None):
+	text = str(input("Enter the e-mail text: "))
 	to = []
 	count = 0
-	while count < 10:
+	limit = int(input("How many recipients would you like? "))
+	while count < limit:
 		recp = input("Enter a mail recipient: ")
 		if recp is not None:
 			recp = input("Enter a mail recipient: ")
@@ -53,4 +55,4 @@ def message(subject="Python Notification", text="", img=None, attachment=None):
 	smtp.quit()
 
 
-message(subject="THIS IS IT!", text="Hear me now")
+message()
