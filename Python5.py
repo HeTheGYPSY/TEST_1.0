@@ -51,7 +51,7 @@ def message(subject="Python Notification", img=None, attachment=None):
 			file['Content-Disposition'] = f'attachment;\
 			filename="{os.path.basename(one_attachment)}"'
 			msg.attach(file)
-	
+
 	for address in to:
 		smtp.sendmail(from_addr=Email, to_addrs=address, msg=msg.as_string())
 	smtp.quit()
