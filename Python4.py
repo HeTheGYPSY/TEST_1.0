@@ -8,7 +8,7 @@ from colorama import Fore, Style
 from time import sleep
 
 colorama.init()
-R_HOST = input("Provide the remote IP Address: ")
+R_HOST = socket.gethostbyname(socket.gethostname())
 R_PORT = 2222
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect((R_HOST, R_PORT))
