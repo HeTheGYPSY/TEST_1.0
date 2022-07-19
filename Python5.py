@@ -5,7 +5,6 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 import smtplib
 
-
 port = int(input("Which mail port would you like to use (578/465)? "))
 Email = input("Which email would you like to use? ")
 Password = str(input("Enter the password: "))

